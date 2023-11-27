@@ -14,5 +14,5 @@ template_path = folder_path.parent / "template.py"
 folder_path.mkdir()
 (folder_path / "day{}input.txt".format(args.day)).touch()
 (folder_path / "day{}test.txt".format(args.day)).touch()
-shutil.copy(template_path, folder_path / "day{}part1.py".format(args.day))
+shutil.copy(template_path, folder_path / "day{}.py".format(args.day))
 print('Done')
