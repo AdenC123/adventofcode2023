@@ -8,11 +8,9 @@ FILENAME = "test.txt"
 
 # GLOBALS
 
-
 # FILE PARSING
 with open(FILENAME) as f:
-    for line in f:
-        pass
+    lines = f.readlines()
 
 
 # HELPERS
@@ -28,4 +26,4 @@ def part2() -> int:
 
 
 print("Part 1: " + str(part1()))
-print("Part 2: " + str(part1()))
+print("Part 2: " + str(part2()))
