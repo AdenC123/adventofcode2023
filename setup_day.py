@@ -12,7 +12,7 @@ folder_path = pathlib.Path(__file__).parent.resolve() / "day{}".format(args.day)
 template_path = folder_path.parent / "template.py"
 
 folder_path.mkdir()
-(folder_path / "day{}input.txt".format(args.day)).touch()
-(folder_path / "day{}test.txt".format(args.day)).touch()
+(folder_path / "input.txt".format(args.day)).touch()
+(folder_path / "test.txt".format(args.day)).touch()
 shutil.copy(template_path, folder_path / "day{}.py".format(args.day))
 print('Done')
