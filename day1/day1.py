@@ -1,8 +1,12 @@
 import re
-from collections import namedtuple
 
 # STRUCTURES
-d = {
+
+# CONSTANTS
+FILENAME = "input.txt"
+
+# GLOBALS
+numbers = {
     "one": 1,
     "two": 2,
     "three": 3,
@@ -13,54 +17,39 @@ d = {
     "eight": 8,
     "nine": 9
 }
-d2 = {}
-for i in d.items():
-    d2[i[0][::-1]] = i[1]
-
-# CONSTANTS
-FILENAME = "input.txt"
-
-# GLOBALS
-
+reverse_numbers = {}
+for s in numbers.keys():
+    reverse_numbers[s[::-1]] = numbers[s]
 
 # FILE PARSING
-
+with open(FILENAME) as f:
+    lines = f.readlines()
 
 # HELPERS
 
 
 # MAIN
 def part1() -> int:
-    sum = 0
-    # with open(FILENAME) as f:
-    #     for line in f:
-    #         nums = re.findall(r'\d', line)
-    #         sum += int(nums[0] + nums[-1])
-    return sum
+    rsf = 0
+    for line in lines:
+        nums = re.findall(r'\d', line)
+        rsf += int(nums[0] + nums[-1])
+    return rsf
 
 
 def part2() -> int:
-    sum = 0
-    with open(FILENAME) as f:
-        for line in f:
-            first = re.search(r'\d|one|two|three|four|five|six|seven|eight|nine', line).group()
-            if len(first) > 1:
-                first = str(d[first])
-            second = re.search(r'\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin', line[::-1]).group()
-            if len(second) > 1:
-                second = str(d2[second])
-            sum += int(first + second)
-
-            # nums = []
-            # digits = re.findall(r'\d|one|two|three|four|five|six|seven|eight|nine', line)
-            # for s in digits:
-            #     if len(s) > 1:
-            #         nums.append(str(d[s]))
-            #     else:
-            #         nums.append(s)
-            # sum += int(nums[0] + nums[-1])
-            print(first, second)
-    return sum
+    rsf = 0
+    pattern = r'\d|' + '|'.join(list(numbers.keys()))
+    reverse_pattern = r'\d|' + '|'.join(list(reverse_numbers.keys()))
+    for line in lines:
+        first = re.search(pattern, line).group()
+        if len(first) > 1:
+            first = str(numbers[first])
+        second = re.search(reverse_pattern, line[::-1]).group()
+        if len(second) > 1:
+            second = str(reverse_numbers[second])
+        rsf += int(first + second)
+    return rsf
 
 
 print("Part 1: " + str(part1()))

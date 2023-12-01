@@ -1,10 +1,9 @@
-from collections import namedtuple
-
-# STRUCTURES
 
 
 # CONSTANTS
 FILENAME = "test.txt"
+
+# STRUCTURES
 
 # GLOBALS
 
