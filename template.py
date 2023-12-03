@@ -1,4 +1,3 @@
-# CONSTANTS
 
 
 # STRUCTURES
@@ -21,8 +20,14 @@ def part2(lines) -> int:
 
 def main():
     with open("test.txt") as f:
-        print("Part 1 Test: " + str(part1(f.readlines())))
-        print("Part 2 Test: " + str(part1(f.readlines())))
+        lines = f.readlines()
+        print("Part 1 Test: " + str(part1(lines)))
+        # print("Part 2 Test: " + str(part2(lines)))
     with open("input.txt") as f:
-        print("Part 1 Input: " + str(part1(f.readlines())))
-        print("Part 2 Input: " + str(part1(f.readlines())))
+        lines = f.readlines()
+        # print("Part 1 Input: " + str(part1(lines)))
+        # print("Part 2 Input: " + str(part2(lines)))
+
+
+if __name__ == '__main__':
+    main()

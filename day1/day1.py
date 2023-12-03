@@ -17,9 +17,7 @@ numbers = {
     "eight": 8,
     "nine": 9
 }
-reverse_numbers = {}
-for s in numbers.keys():
-    reverse_numbers[s[::-1]] = numbers[s]
+reverse_numbers = {s[::-1]: num for (s, num) in numbers.items()}
 
 # FILE PARSING
 with open(FILENAME) as f:
