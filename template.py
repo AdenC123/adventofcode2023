@@ -6,9 +6,6 @@
 # GLOBALS
 
 
-# HELPERS
-
-
 # MAIN
 def part1(lines) -> int:
     return 0
