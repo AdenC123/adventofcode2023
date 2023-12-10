@@ -1,3 +1,4 @@
+import math
 
 
 # STRUCTURES
@@ -31,19 +32,18 @@ def part2(lines) -> int:
     ins = lines[0].strip()
     # map node: (left, right)
     nodes = {}
-    # either a node string or an int of its cycles
+    # either a node string or an int of its path length
     curr_nodes = []
     for line in lines[2:]:
         nodes[line[0:3]] = (line[7:10], line[12:15])
         if line[2] == 'A':
             curr_nodes.append(line[0:3])
-    # do ins, keep track of visited for each curr_nodes index
-    visited = {i: [node] for i, node in enumerate(curr_nodes)}
+    # do ins
     curr_ins = 0
     steps = 0
-    num_cycled = 0
-    while num_cycled != len(curr_nodes):
-        # advance all curr_nodes, watch for cycles
+    num_done = 0
+    while num_done != len(curr_nodes):
+        # advance all curr_nodes
         for i in range(len(curr_nodes)):
             curr = curr_nodes[i]
             # check if cycled already
@@ -55,20 +55,14 @@ def part2(lines) -> int:
             elif ins[curr_ins] == 'R':
                 curr_nodes[i] = nodes[curr][1]
             curr = curr_nodes[i]
-            if curr[2] == 'Z' and curr in visited[i]:
-                # cycle detected
-                cycle_len = len(visited[i]) - visited[i].index(curr)
-                curr_nodes[i] = cycle_len
-                num_cycled += 1
-            else:
-                visited[i].append(curr)
+            if curr[2] == 'Z':
+                # at end, replace with path len
+                curr_nodes[i] = steps + 1
+                num_done += 1
         steps += 1
-        # if steps % 1000000 == 0:
-        #     print(f'\r{steps}', end='')
         curr_ins = (curr_ins + 1) % len(ins)
-    # TODO add LCF of the cycles? maybe need to track where in the cycle we are
-    print(curr_nodes)
-    return steps
+    # print(curr_nodes)
+    return math.lcm(*curr_nodes)
 
 
 def main():
